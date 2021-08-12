@@ -1,0 +1,26 @@
+<div class="col-sm-10">
+  <div class="row">
+    <a style="cursor: pointer" routerLink="{{ index }}">
+      <div class="row">
+        <img  [src]="product.imagePath" alt="{{ product.name }}" class="h-75">
+      </div>
+      <div class="row mt-2">
+        <p class="mb-0">{{ product.brand }}</p>
+        <p class="mb-0">{{ product.name }}</p>
+        <p class="mb-0 price">{{ product.price }}.-</p>
+      </div>
+    </a>
+  </div>
+  <div class="row mt-2">
+    <div class="col-sm-6">
+      <button class="addToSomethingButton addToWishlistButton"><img src="../../../../assets/icons/heart-regular.svg" alt=""></button>
+    </div>
+    <div class="col-sm-6">
+      <button class="addToSomethingButton addToCartButton"><img src="../../../../assets/icons/shopping-cart.svg" alt=""></button>
+    </div>
+  </div>
+
+</div>
+
+
+

@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-sm-12 mt-3 offset-lg-1">
+    <a [routerLink]="['/']">producten</a> > <a [routerLink]="['']">{{product.id}}  {{ product.brand.toLowerCase() }} {{product.name}}</a>
+  </div>
+</div>
+<div class="row product">
+  <div class="col-sm-12 mt-3 mb-3 offset-lg-1">
+      <div class="row">
+        <div class="col-sm-10 col-md-10 col-lg-6">
+          <img class="img-fluid" [src]="product.imagePath" alt="{{ product.name }}">
+        </div>
+        <div class="col-sm-10 col-md-10 col-lg-4 mt-md-3 mt-lg-0">
+          <div class="row">
+            <p class="mb-0">{{ product.brand }}</p>
+            <p class="mb-0">{{ product.name }}</p>
+            <p class="mb-0 product__price">{{ product.price }}.-</p>
+          </div>
+          <div class="row">
+            <button class="product__addToCartButton">in winkelmandje</button>
+            <p class="mt-1 text-center">vandaag besteld, morgen in huis</p>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+
+            </div>
+            <ul class="product__beloften">
+              <li><img src="../../../assets/icons/check-solid.svg" alt="">gratis bezorging en retour.</li>
+              <li><img src="../../../assets/icons/check-solid.svg" alt="">30 dagen bedenktijd.</li>
+              <li><img src="../../../assets/icons/check-solid.svg" alt="">betaal zoals je wilt: vooraf, achteraf, of gespreid.</li>
+              <li><img src="../../../assets/icons/check-solid.svg" alt="">standaard met 2 jaar garantie</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-10">
+        <h3 class="product__descName mt-3">
+         {{ product.brand }} {{ product.name }}
+        </h3>
+        <p>
+          {{ product.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
