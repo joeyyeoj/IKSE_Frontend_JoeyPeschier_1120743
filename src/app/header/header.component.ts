@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {AccountService} from "../account/account.service";
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,13 @@ import {Component} from "@angular/core";
 })
 
 
-export class HeaderComponent {
+export class HeaderComponent{
   isCollapsed = false;
+  authenticated = this.accountservice.isAuthenticated;
 
+
+  constructor(private accountservice: AccountService) {
+  }
 
 
 

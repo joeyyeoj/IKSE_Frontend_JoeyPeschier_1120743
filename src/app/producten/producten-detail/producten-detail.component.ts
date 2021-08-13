@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, ActivatedRouteSnapshot, Params} from "@angular/router";
 import {Product} from "../product.model";
 import {ProductenService} from "../producten.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-product-detail',
@@ -12,6 +13,7 @@ export class ProductenDetailComponent implements OnInit, OnDestroy{
   id: number;
   private sub: any;
   product: Product;
+  productSub: Subscription;
 
   constructor(private route: ActivatedRoute, private productService: ProductenService) {
 
@@ -20,11 +22,15 @@ export class ProductenDetailComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.productService.getProducts();
-
-    this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id'];
-      this.product = this.productService.getProduct(this.id)!;
+    this.productSub = this.productService.productsChanged.subscribe(products => {
+      this.sub = this.route.params.subscribe(params => {
+        this.id = +params['id'];
+        this.product = this.productService.getProduct(this.id)!;
+      })
     })
+
+
+
 
   }
 

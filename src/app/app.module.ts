@@ -7,20 +7,27 @@ import {ActivatedRoute, ActivatedRouteSnapshot, RouterModule} from "@angular/rou
 import {ProductenModule} from "./producten/producten.module";
 import {CommonModule} from "@angular/common";
 import {ProductenService} from "./producten/producten.service";
+import {HttpClient, HttpClientModule,} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {LoginComponent} from "./account/login/login.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule,
-    ProductenModule
+    ProductenModule,
+    HttpClientModule,
   ],
-  providers: [ProductenService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,7 @@
       <div class="row">
         <img  [src]="product.imagePath" alt="{{ product.name }}" class="h-75">
       </div>
-      <div class="row mt-2">
+      <div class="product__details row mt-2">
         <p class="mb-0">{{ product.brand }}</p>
         <p class="mb-0">{{ product.name }}</p>
         <p class="mb-0 price">{{ product.price }}.-</p>
@@ -12,7 +12,7 @@
     </a>
   </div>
   <div class="row mt-2">
-    <div class="col-sm-6">
+    <div class="col-sm-6 mb-2">
       <button class="addToSomethingButton addToWishlistButton"><img src="../../../../assets/icons/heart-regular.svg" alt=""></button>
     </div>
     <div class="col-sm-6">
