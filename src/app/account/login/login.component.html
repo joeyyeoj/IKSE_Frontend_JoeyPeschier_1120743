@@ -10,7 +10,7 @@
         <input type="text" id="password" ngModel name="password" class="form-control" required minlength="6">
       </div>
       <div class="form-group mt-3">
-        <button class="accountForm__submit" type="submit">Login</button>
+        <button class="accountForm__submit" [disabled]="!authForm.valid" type="submit">Login</button>
         <a routerLink="/register">Registreren</a>
       </div>
     </form>

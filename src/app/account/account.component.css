@@ -17,6 +17,17 @@
   transition: background-color 0.3s ease;
 }
 
+.accountForm__submit:disabled  {
+  background-color: #7e7e7e;
+  font-style: italic;
+  color: #4e4e4e;
+}
+
+.accountForm__submit:disabled:hover{
+  background-color: #7e7e7e;
+  cursor: not-allowed;
+}
+
 .accountForm__submit:hover{
   background-color: #334257;
 }

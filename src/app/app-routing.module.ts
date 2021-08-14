@@ -5,13 +5,15 @@ import {AccountComponent} from "./account/account.component";
 import {ProductenDetailComponent} from "./producten/producten-detail/producten-detail.component";
 import {LoginComponent} from "./account/login/login.component";
 import {AccountGuard} from "./account/account.guard";
+import {RegisterComponent} from "./account/register/register.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/producten', pathMatch: 'full' },
   { path: 'producten',  component: ProductenComponent },
   { path: 'producten/:id', component: ProductenDetailComponent},
   { path: 'account', canActivate: [AccountGuard], component: AccountComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent}
 
 ];
 

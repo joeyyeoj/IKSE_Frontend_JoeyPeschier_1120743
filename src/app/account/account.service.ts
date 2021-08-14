@@ -6,7 +6,6 @@ import {Subject} from "rxjs";
 
 export interface AuthResponseData {
   user: { name: string, email: string, admin: boolean },
-
   token: string,
   expiresIn: number
 }
@@ -31,10 +30,21 @@ export class AccountService {
     })
   }
 
+  register(name: string, email:string, password: string, password_confirm: string){
+    this.http.post<AuthResponseData>('http://localhost:8000/api/auth/register', {
+      "name": name,
+      "email": email,
+      "password": password,
+      "password_confirmation": password_confirm
+    }).subscribe(response => {
+      this.handleAuthentication(response.user.name, response.user.email, response.user.admin, response.token, response.expiresIn)
+    })
+  }
+
 
   handleAuthentication(name: string, email:string, admin: boolean, token: string, expiresIn: number){
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    this.user = new User(name, email, token, expirationDate, true);
+    this.user = new User(name, email, token, expirationDate, admin);
     this.userChanged.next(this.user);
     this.isAuthenticated = true;
     this.isAdmin = this.user.admin;

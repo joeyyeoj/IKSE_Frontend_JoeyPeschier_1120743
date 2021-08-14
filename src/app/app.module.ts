@@ -10,12 +10,13 @@ import {ProductenService} from "./producten/producten.service";
 import {HttpClient, HttpClientModule,} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginComponent} from "./account/login/login.component";
+import {RegisterComponent} from "./account/register/register.component";
+import {AccountModule} from "./account/account.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +27,7 @@ import {LoginComponent} from "./account/login/login.component";
     RouterModule,
     ProductenModule,
     HttpClientModule,
+    AccountModule
   ],
   providers: [],
   bootstrap: [AppComponent]
