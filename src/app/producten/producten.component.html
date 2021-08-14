@@ -1,5 +1,6 @@
 <div class="col-sm-12 mt-5">
     <h1>Producten</h1>
+  <button class="btn btn-primary" (click)="onAddProduct()" *ngIf="isAdmin">Producten toevoegen</button>
     <div class="row">
       <app-product-list>
 

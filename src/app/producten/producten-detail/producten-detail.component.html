@@ -5,6 +5,7 @@
 </div>
 <div class="row product">
   <div class="col-sm-12 mt-3 mb-3 offset-lg-1">
+    <button class="btn btn-primary mb-2" (click)="onEdit()" *ngIf="adminstatus">Bewerken</button>
       <div class="row">
         <div class="col-sm-10 col-md-10 col-lg-6">
           <img class="product__img img-fluid" [src]="product?.imagePath" alt="{{ product?.name }}">

@@ -53,4 +53,8 @@ export class AccountService {
   getAuthentication(){
     return this.isAuthenticated;
   }
+
+  getAdminStatus(){
+    return this.isAdmin;
+  }
 }

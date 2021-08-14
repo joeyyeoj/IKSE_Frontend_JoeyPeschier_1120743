@@ -1,15 +1,19 @@
 import {Injectable, OnDestroy, OnInit} from "@angular/core";
 import {Product} from "./product.model";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Subject} from "rxjs";
+import {AccountService} from "../account/account.service";
 
 
 @Injectable({providedIn: 'root'})
-export class ProductenService {
+export class ProductenService implements OnDestroy{
+  selectedProduct: Product;
 
   producten: Product[] = [];
   productsChanged = new Subject<Product[]>();
-  constructor(private http: HttpClient) {
+  productToBeEdited: Product | null;
+
+  constructor(private http: HttpClient, private accountservice: AccountService) {
   }
 
   getProducts(){
@@ -23,6 +27,29 @@ export class ProductenService {
       }
 
     })
+  }
+
+  ngOnDestroy() {
+    this.productToBeEdited = null;
+  }
+
+  editProduct(product: Product){
+    this.productToBeEdited = product;
+  }
+
+  storeNewProduct(product: Product){
+    return this.http.post('http://127.0.0.1:8000/api/product/create', {
+      'brand': product.brand,
+      'name': product.name,
+      'price': product.price,
+      'imagePath': product.imagePath,
+      'description': product.description
+    },
+      {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + this.accountservice.user.token
+        })
+      })
   }
 
   fetchProducts(){

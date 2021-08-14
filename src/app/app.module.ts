@@ -22,10 +22,10 @@ import {AccountModule} from "./account/account.module";
     BrowserModule,
     CommonModule,
     AppRoutingModule,
+    ProductenModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    ProductenModule,
     HttpClientModule,
     AccountModule
   ],

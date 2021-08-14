@@ -7,19 +7,24 @@ import {CommonModule} from "@angular/common";
 import {ProductenDetailComponent} from "./producten-detail/producten-detail.component";
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
+import {CrudComponent} from "./admin/CRUD/crud.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     ProductenComponent,
     ProductenItemComponent,
     ProductenLijstComponent,
-    ProductenDetailComponent
+    ProductenDetailComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ProductenModule {
