@@ -3,22 +3,22 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="accountForm">
       <div class="form-group">
         <label for="name">Naam</label>
-        <input formControlName="name" type="text" id="name" name="name" class="form-control" required>
+        <input formControlName="name" type="text" id="name" name="name" class="form-control">
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input formControlName="email" type="text" id="email" name="email" class="form-control" required email>
+        <input formControlName="email" type="text" id="email" name="email" class="form-control">
       </div>
       <div class="form-group mt-2">
         <label for="password">Wachtwoord</label>
-        <input (input)="registerForm.get('password_confirm')" formControlName="password" type="password" id="password" name="password" class="form-control" required minlength="6">
+        <input [class.ng-invalid]="!passwordsValid" (input)="checkPasswords()" formControlName="password" type="password" id="password" name="password" class="form-control">
       </div>
       <div class="form-group mt-2">
         <label for="password_confirm">Wachtwoord bevestigen</label>
-        <input formControlName="password_confirm" type="password" id="password_confirm" name="password_confirm" class="form-control" required minlength="6">
+        <input [class.ng-invalid]="!passwordsValid" (input)="checkPasswords()" formControlName="password_confirm" type="password" id="password_confirm" name="password_confirm" class="form-control">
       </div>
       <div class="form-group mt-3">
-        <button class="accountForm__submit" [disabled]="!registerForm.valid" type="submit">Registreren</button>
+        <button class="accountForm__submit" [disabled]="!registerForm.valid || !passwordsValid" type="submit">Registreren</button>
         <a routerLink="/login">Login</a>
       </div>
     </form>

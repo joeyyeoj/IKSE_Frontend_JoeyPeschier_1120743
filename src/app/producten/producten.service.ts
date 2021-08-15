@@ -52,6 +52,29 @@ export class ProductenService implements OnDestroy{
       })
   }
 
+  updateProduct(product: Product){
+    return this.http.put('http://127.0.0.1:8000/api/product/update', {
+      'id': product.id,
+      'brand': product.brand,
+      'name': product.name,
+      'price': product.price,
+      'imagePath': product.imagePath,
+      'description': product.description
+    }, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.accountservice.user.token
+      })
+    })
+  }
+
+  deleteProduct(id: number){
+    return this.http.delete('http://127.0.0.1:8000/api/product/delete/' + id, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.accountservice.user.token
+      })
+    })
+  }
+
   fetchProducts(){
     return this.http.get<Product[]>('http://127.0.0.1:8000/api/products');
   }

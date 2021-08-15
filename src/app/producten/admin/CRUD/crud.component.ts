@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit} from "@angular/core";
 import {ProductenService} from "../../producten.service";
 import {AccountService} from "../../../account/account.service";
 import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {Product} from "../../product.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-productcrud',
@@ -11,15 +12,17 @@ import {Product} from "../../product.model";
   styleUrls: ['./crud.component.css']
 })
 
-export class CrudComponent implements OnInit, OnDestroy{
+export class CrudComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
   productToBeEditedSub = new Subscription();
   editThisProduct: Product;
   existingProduct = false;
 
 
-  constructor(private productservice: ProductenService, private accountservice: AccountService) {
+  constructor(private productservice: ProductenService, private accountservice: AccountService, private router: Router) {
   }
+
+
 
   ngOnInit() {
     this.editThisProduct = this.productservice.productToBeEdited!;
@@ -35,12 +38,17 @@ export class CrudComponent implements OnInit, OnDestroy{
 
   doUpdateOrCreate(){
     if(this.editThisProduct != null){
-      //update code
+      let updateThisProduct = new Product(this.editThisProduct.id, this.productForm.get('brand')?.value, this.productForm.get('name')?.value, this.productForm.get('price')?.value, this.productForm.get('description')?.value, this.productForm.get('imagePath')?.value)
+      this.productservice.updateProduct(updateThisProduct).subscribe(response => {
+        console.log(response);
+        this.router.navigate(['producten']);
+      });
     }
     else{
       let newProduct = new Product(0, this.productForm.get('brand')?.value, this.productForm.get('name')?.value, this.productForm.get('price')?.value, this.productForm.get('description')?.value, this.productForm.get('imagePath')?.value);
       this.productservice.storeNewProduct(newProduct).subscribe(response => {
         console.log(response);
+        this.router.navigate(['producten']);
       });
     }
   }
@@ -48,8 +56,15 @@ export class CrudComponent implements OnInit, OnDestroy{
   deleteProduct(){
     //extra check maar zou altijd waar moeten zijn owo
     if(this.accountservice.isAdmin){
-
+      this.productservice.deleteProduct(this.editThisProduct.id).subscribe(response => {
+        console.log(response)
+        this.router.navigate(['producten']);
+      });
     }
+  }
+
+  cancel(){
+    this.router.navigate(['producten'])
   }
 
 
