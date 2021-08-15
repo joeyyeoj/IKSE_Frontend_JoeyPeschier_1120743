@@ -31,3 +31,7 @@
 .accountForm__submit:hover{
   background-color: #334257;
 }
+
+input.ng-invalid.ng-touched{
+  border-color: red;
+}

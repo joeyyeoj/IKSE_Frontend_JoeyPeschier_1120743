@@ -10,7 +10,6 @@ import {CrudComponent} from "./producten/admin/CRUD/crud.component";
 import {AdminGuard} from "./account/admin.guard";
 
 const routes: Routes = [
-  { path: '**', redirectTo: '/producten'},
   { path: '', redirectTo: '/producten', pathMatch: 'full' },
   { path: 'producten',  component: ProductenComponent },
   { path: 'producten/create', canActivate: [AdminGuard], component: CrudComponent},
@@ -18,6 +17,7 @@ const routes: Routes = [
   { path: 'account', canActivate: [AccountGuard], component: AccountComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
+  { path: '**', redirectTo: '/producten'},
 
 
 ];
