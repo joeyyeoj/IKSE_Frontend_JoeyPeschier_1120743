@@ -23,8 +23,9 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit{
   passwordsValid = false;
   userSub = new Subscription;
-
+  errorSub = new Subscription;
   registerForm: FormGroup;
+  errorMsg: string;
 
   constructor(private accountService: AccountService, private router: Router) {
   }
@@ -34,6 +35,10 @@ export class RegisterComponent implements OnInit{
       if(user){
         this.router.navigate(['account'])
       }
+    })
+
+    this.errorSub = this.accountService.errorMessage.subscribe(error => {
+      this.errorMsg = error;
     })
 
     this.registerForm = new FormGroup({
@@ -57,6 +62,8 @@ export class RegisterComponent implements OnInit{
 
 
   onSubmit(){
-    this.accountService.register(this.registerForm.get('name')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value, this.registerForm.get('password_confirm')?.value);
+    if(this.passwordsValid && this.registerForm.valid){
+      this.accountService.register(this.registerForm.get('name')?.value, this.registerForm.get('email')?.value, this.registerForm.get('password')?.value, this.registerForm.get('password_confirm')?.value);
+    }
   }
 }

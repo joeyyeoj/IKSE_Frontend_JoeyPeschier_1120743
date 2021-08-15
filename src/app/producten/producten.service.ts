@@ -12,9 +12,13 @@ export class ProductenService implements OnDestroy{
   producten: Product[] = [];
   productsChanged = new Subject<Product[]>();
   productToBeEdited: Product | null;
+  productError: Error;
 
   constructor(private http: HttpClient, private accountservice: AccountService) {
   }
+
+
+
 
   getProducts(){
     this.fetchProducts().subscribe(products => {

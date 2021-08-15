@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {User} from "./user.model";
-import {HttpClient} from "@angular/common/http";
-import {Subject} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Subject, throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 
 export interface AuthResponseData {
@@ -16,6 +17,7 @@ export class AccountService {
   userChanged = new Subject<User>();
   isAuthenticated = false;
   isAdmin = false;
+  errorMessage = new Subject<string>();
 
   constructor(private http: HttpClient) {
   }
@@ -27,7 +29,24 @@ export class AccountService {
       password: password
     }).subscribe(response => {
       this.handleAuthentication(response.user.name, response.user.email, response.user.admin, response.token, response.expiresIn);
-    })
+    },
+      error => {
+      this.handleError(error)
+      })
+  }
+
+  handleError(error: HttpErrorResponse){
+    let errorMsg = 'Onbekende error, sorry =('
+    if(error){
+      switch(error.statusText){
+        case "Unauthorized":
+          errorMsg = 'Verkeerd wachtwoord of email-adres'
+          break;
+        case "Bad Request":
+          errorMsg = 'Email-adres al in gebruik of ontbrekende gegevens'
+      }
+    }
+    this.errorMessage.next(errorMsg);
   }
 
   register(name: string, email:string, password: string, password_confirm: string){
@@ -38,6 +57,8 @@ export class AccountService {
       "password_confirmation": password_confirm
     }).subscribe(response => {
       this.handleAuthentication(response.user.name, response.user.email, response.user.admin, response.token, response.expiresIn)
+    }, error => {
+      this.handleError(error)
     })
   }
 
@@ -49,6 +70,7 @@ export class AccountService {
     this.isAuthenticated = true;
     this.isAdmin = this.user.admin;
   }
+
 
   getAuthentication(){
     return this.isAuthenticated;

@@ -13,9 +13,13 @@ import {Router} from "@angular/router";
 
 export class LoginComponent implements OnInit{
   userSub = new Subscription;
+  errorSub = new Subscription;
+  errorMsg: string;
 
   constructor(private accountService: AccountService, private router: Router) {
   }
+
+
 
   ngOnInit() {
     this.userSub = this.accountService.userChanged.subscribe(user => {
@@ -24,6 +28,9 @@ export class LoginComponent implements OnInit{
       }
     })
 
+    this.errorSub = this.accountService.errorMessage.subscribe(error => {
+      this.errorMsg = error;
+    })
   }
 
   onSubmit(form: NgForm){
